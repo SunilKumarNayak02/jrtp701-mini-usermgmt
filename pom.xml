@@ -71,6 +71,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>jrtp03-mini-usermgmt-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
