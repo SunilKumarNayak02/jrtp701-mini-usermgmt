@@ -1,0 +1,11 @@
+FROM mysql:8.0.33
+
+ENV MYSQL_DATABASE=jrtp
+ENV MYSQL_USER=root
+ENV MYSQL_PASSWORD=ramram
+
+VOLUME /var/lib/mysql
+
+EXPOSE 3306
+
+CMD ["mysqld"] 

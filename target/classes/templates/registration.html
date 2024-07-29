@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create User Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8F0F8;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for the header */
+        }
+
+        .header h2 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #3369E8, #D50F7A, #FFBB33, #00C6FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px; /* Add some space below the title */
+        }
+
+        .header p {
+            font-size: 1.2em; /* Slightly larger font size for the subtitle */
+            color: #6c757d; /* Dark gray color for the subtitle */
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        /* Input Field Styling */
+        .form-group label {
+            font-weight: 500; /* Slightly bolder font weight for labels */
+            color: #333; /* Dark gray color for labels */
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da; /* Light gray border for input fields */
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease; /* Add a smooth transition */
+        }
+
+        .form-group input:focus {
+            border-color: #80bdff; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add a blue box shadow */
+        }
+
+        /* Radio Button Styling */
+        .form-check-label {
+            font-weight: normal; /* Normal font weight for radio button labels */
+        }
+
+        /* Button Styling */
+        .register-button {
+            background-color: #28a745; /* Green button color */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            transition: box-shadow 0.2s ease; /* Add transition for button glow */
+        }
+
+        .register-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>NareshIT User Account<br> Creation Portal</h2>
+        <p>Spring Boot And Microservices By Natraj Sir </p>
+    </div>
+    <div class="form-section">
+        <h2>Create User Account</h2>
+        <form th:action="@{/save}" th:object="${userAccount}" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" th:field="*{username}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Old Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" th:field="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label for="mobileNo">Contact No:</label>
+                <input type="tel" id="mobileNo" name="mobileNo" placeholder="Enter your contact number" th:field="*{mobileNo}" required>
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="maleRadio" value="Male" th:field="*{gender}" checked>
+                    <label class="form-check-label" for="maleRadio">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="femaleRadio" value="Female" th:field="*{gender}">
+                    <label class="form-check-label" for="femaleRadio">Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" th:field="*{dob}" required>
+            </div>
+            <div class="form-group">
+                <label for="aadharNo">Aadhar/SSN No:</label>
+                <input type="text" id="aadharNo" name="aadharNo" placeholder="Enter your Aadhar/SSN number" th:field="*{aadharNo}" required>
+            </div>
+            <button type="submit" class="register-button">REGISTER</button>
+            <div th:if="${message}" th:text="${message}" th:class="${#strings.contains(message, 'failed')} ? 'error-message' : 'success-message'"></div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const formSection = document.querySelector('.form-section');
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function applyRandomGlow() {
+        const randomColor = getRandomColor();
+        formSection.style.boxShadow = `0px 0px 20px 10px ${randomColor}`;
+    }
+
+    setInterval(applyRandomGlow, 1000);
+</script>
+</body>
+</html>

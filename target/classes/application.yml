@@ -1,0 +1,37 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: Docker-MiniProject03-UserManagementAPI
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///jrtp
+    username: root
+    password: ramram
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nayaksunilkumar903@gmail.com
+    password: iaofkmsmxtgpzbrw
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          port: 587
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+mailbody:
+  registeruser:
+    location: src/main/java/org/sun/user_registration_body.txt
+  recoverpwd:
+    location: src/main/java/org/sun/recover_pwd_body.txt

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Activate User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F2F2F2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            width: 500px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .image-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .image-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: animate 8s linear infinite;
+        }
+
+        @keyframes animate {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 400%;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .register-button {
+            background-color: #9C27B0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .register-button:hover {
+            background-color: #7B1FA2;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        /* Style for the eye icon */
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle i {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        .image-section span#emoji {
+            font-size: 6em;
+            animation: blink 4s infinite; /* Adjust the duration (4s) as needed */
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { content: "😪"; }
+            25% { content: "😴"; } /* Change to a slightly different emoji */
+        }
+    </style>
+</head>
+</head>
+<body>
+<div class="container">
+    <div class="image-section">
+        <h2>NareshIT Activation Portal</h2>
+        <p>User Management Admin Portal</p>
+        <span id="emoji" style="font-size: 6em;">😎</span>
+    </div>
+
+    <h2>Activate User</h2>
+    <form th:action="@{/activate}" th:object="${activateUser}" method="post">
+        <div class="form-group">
+            <label for="email">Registered Email:</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your registered email" th:field="*{email}" required>
+        </div>
+        <div class="form-group password-toggle">
+            <label for="tempPassword">Generated Temp Password:</label>
+            <input type="password" class="form-control" id="tempPassword" name="tempPassword" placeholder="Enter your temporary password" th:field="*{tempPassword}" required>
+            <i class="far fa-eye" onclick="togglePassword('tempPassword')"></i>
+        </div>
+        <div class="form-group password-toggle">
+            <label for="newPassword">Password:</label>
+            <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter your new password" th:field="*{newPassword}" required>
+            <i class="far fa-eye" onclick="togglePassword('newPassword')"></i>
+        </div>
+        <div class="form-group password-toggle">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your new password" th:field="*{confirmPassword}" required>
+            <i class="far fa-eye" onclick="togglePassword('confirmPassword')"></i>
+        </div>
+        <button type="submit" class="register-button">ACTIVATE USER</button>
+        <div th:if="${message}" th:text="${message}" th:class="${#strings.contains(message, 'failed')} ? 'error-message' : 'success-message'"></div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function togglePassword(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = passwordInput.nextElementSibling;
+        const emojiElement = document.getElementById('emoji'); // Get the emoji element
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+            emojiElement.textContent = '🤔'; // Show open eye emoji
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+            emojiElement.textContent = '😎'; // Show closed eye emoji
+        }
+    }
+</script>
+</body>
+</html>

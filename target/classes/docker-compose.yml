@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  user-management-api:
+    build:
+      context: .. # Use ".." to go up one level from the resources directory
+      dockerfile: Dockerfile-spring 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/jrtp
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ramram # Replace with your actual password
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
+
+  mysql:
+    image: mysql:8.0.33
+    environment:
+      MYSQL_DATABASE: jrtp
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ramram 
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data: 
