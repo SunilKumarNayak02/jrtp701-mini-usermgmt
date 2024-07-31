@@ -1,6 +1,4 @@
-//UserMaster
 package org.sun.entity;
-
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="JRTP_USER_MASTER_UI_DEVELOPMENT")
+@Table(name="JRTP_USER_MASTER")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,8 +32,6 @@ public class UserMaster {
     private LocalDate dob;
     @Column(length = 20)
     private String active_sw;
-    @Column(length = 40, unique = true) // Assuming usernames should be unique
-    private String username; // Add the username field
 
     //MetaData
     @CreationTimestamp
@@ -48,4 +44,8 @@ public class UserMaster {
     private String createdBy;
     @Column(length = 20)
     private String updatedBy;
+
+    // Make sure the username field is public
+    @Column(length = 30)
+    public String username;
 }

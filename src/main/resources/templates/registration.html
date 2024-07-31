@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Create User Account</title>
+    <title>Sunil Kumar Nayak</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #F8F0F8;
+            overflow: hidden; /* Prevent scrollbars */
         }
 
         .container {
@@ -24,21 +25,40 @@
             background-color: #FFFFFF;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for the header */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .header h2 {
-            font-size: 2em;
+            font-size: 4em;
             background: linear-gradient(90deg, #3369E8, #D50F7A, #FFBB33, #00C6FF);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 10px; /* Add some space below the title */
+            margin-bottom: 10px;
+            animation: animateText 3s linear infinite;
+        }
+
+        @keyframes animateText {
+            0% {
+                text-shadow: 0 0 10px #3369E8;
+            }
+            25% {
+                text-shadow: 0 0 15px #D50F7A;
+            }
+            50% {
+                text-shadow: 0 0 20px #FFBB33;
+            }
+            75% {
+                text-shadow: 0 0 15px #00C6FF;
+            }
+            100% {
+                text-shadow: 0 0 10px #3369E8;
+            }
         }
 
         .header p {
-            font-size: 1.2em; /* Slightly larger font size for the subtitle */
-            color: #6c757d; /* Dark gray color for the subtitle */
+            font-size: 1.8em;
+            color: #6c757d;
         }
 
         .form-section {
@@ -48,12 +68,37 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             width: 500px;
             transition: box-shadow 0.2s ease;
+            animation: borderGlow 5s linear infinite;
+            position: relative; /* To allow positioning of images */
         }
 
-        /* Input Field Styling */
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0px 0px 5px 2px #3369E8; /* Reduced blur and spread */
+            }
+            25% {
+                box-shadow: 0px 0px 8px 4px #D50F7A; /* Reduced blur and spread */
+            }
+            50% {
+                box-shadow: 0px 0px 10px 6px #FFBB33; /* Reduced blur and spread */
+            }
+            75% {
+                box-shadow: 0px 0px 8px 4px #00C6FF; /* Reduced blur and spread */
+            }
+            100% {
+                box-shadow: 0px 0px 5px 2px #3369E8; /* Reduced blur and spread */
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         .form-group label {
-            font-weight: 500; /* Slightly bolder font weight for labels */
-            color: #333; /* Dark gray color for labels */
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 5px;
         }
 
         .form-group input[type="text"],
@@ -61,116 +106,325 @@
         .form-group input[type="tel"],
         .form-group input[type="date"] {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da; /* Light gray border for input fields */
-            border-radius: 4px;
+            padding: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
             box-sizing: border-box;
-            transition: border-color 0.2s ease; /* Add a smooth transition */
+            transition: border-color 0.2s ease;
+            font-size: 1em;
         }
 
         .form-group input:focus {
-            border-color: #80bdff; /* Change border color on focus */
-            outline: none; /* Remove default outline */
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add a blue box shadow */
+            border-color: #80bdff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
 
-        /* Radio Button Styling */
         .form-check-label {
-            font-weight: normal; /* Normal font weight for radio button labels */
+            font-weight: normal;
+        }
+        .form-section h2 {
+            color: red; /* Red font color */
+            font-family: Verdana; /* Verdana font */
+            font-weight: bold; /* Bold font weight */
         }
 
-        /* Button Styling */
         .register-button {
-            background-color: #28a745; /* Green button color */
+            background-color: red; /* Default button color is now red */
             color: white;
-            padding: 12px 20px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            transition: box-shadow 0.2s ease; /* Add transition for button glow */
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform transition */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Added default box shadow */
+            animation: colorCycle 4s linear infinite; /* Added animation */
+        }
+
+        @keyframes colorCycle {
+            0% { background-color: rgb(255, 87, 51); }  /* Red */
+            25% { background-color: rgb(255, 215, 0); } /* Yellow */
+            50% { background-color: rgb(0, 255, 0); } /* Green */
+            75% { background-color: rgb(0, 128, 255); } /* Blue */
+            100% { background-color: rgb(255, 87, 51); } /* Back to Red */
         }
 
         .register-button:hover {
-            background-color: #218838; /* Darker green on hover */
+            background-color: #c00; /* Darker red on hover */
+            transform: scale(1.05); /* Scale up slightly on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Increased box shadow on hover */
         }
 
         .success-message {
             color: green;
+            font-size: 1em;
+            text-align: left;
+            margin-top: 20px;
+            animation: successAnimation 2s ease-in-out;
         }
 
-        .error-message {
-            color: red;
+        @keyframes successAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
+
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 20px; /* Changed to left side */
+            transform: translateY(-50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            font-family: Calibri;
+            font-weight: bold;
+            font-size: 35px;
+            color: red;
+            animation: messageAnimation 2s ease-in-out;
+            width: max-content; /* Added for automatic width */
+        }
+
+        @keyframes messageAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .processing {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .processing .spinner {
+            width: 80px;
+            height: 80px;
+            border: 6px solid transparent;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .processing .spinner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+        }
+
+        /* Styles for the image container */
+        .image-container {
+            position: absolute;
+            middle: 40px; /* Position near the top */
+            right: 20px; /* Position near the right */
+            width: 300px; /* Increased size */
+            height: 300px; /* Increased size */
+            animation: rotateGlow 1s linear infinite; /* Faster rotation: 1 second */
+            overflow: hidden; /* Hide overflow to prevent image distortion */
+            border-radius: 80%; /* Make the container circular */
+        }
+
+        .image-container img {
+            width: 100%; /* Make the image fill the container */
+            height: 100%; /* Make the image fill the container */
+            object-fit: cover; /* Ensure the image covers the entire area */
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+                box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5); /* White glow */
+            }
+            25% {
+                transform: rotate(45deg);
+                box-shadow: 0px 0px 20px rgba(255, 165, 0, 0.8); /* Orange glow */
+            }
+            50% {
+                transform: rotate(90deg);
+                box-shadow: 0px 0px 25px rgba(0, 255, 0, 0.8); /* Green glow */
+            }
+            75% {
+                transform: rotate(135deg);
+                box-shadow: 0px 0px 20px rgba(0, 0, 255, 0.8); /* Blue glow */
+            }
+            100% {
+                transform: rotate(180deg);
+                box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5); /* White glow */
+            }
+
+        }
+
+       
+.react-image-container {
+   position: absolute;
+            top: 40px; /* Position near the top */
+            right: 20px; /* Position near the right */
+            width: 500px; /* Increased size */
+            height: 500px; /* Increased size */
+            animation: reactAnimation 1s linear infinite; /* Faster rotation: 1 second */
+            overflow: hidden; /* Hide overflow to prevent image distortion */
+            border-radius: 80%; /* Make the container circular */
+
+}
+.react-image-container img {
+   width: 100%; /* Make the image fill the container */
+            height: 100%; /* Make the image fill the container */
+            object-fit: cover; /* Ensure the image covers the entire area */
+}
+
+@keyframes reactAnimation {
+    0% {
+        transform: rotate(0deg);
+        /* box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5); */
+    }
+    100% {
+        transform: rotate(360deg);
+        /* box-shadow: 0px 0px 20px rgba(255, 165, 0, 0.8); */
+    }
+}
+@keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+                box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5); /* White glow */
+            }
+            25% {
+                transform: rotate(45deg);
+                box-shadow: 0px 0px 20px rgba(255, 165, 0, 0.8); /* Orange glow */
+            }
+            50% {
+                transform: rotate(90deg);
+                box-shadow: 0px 0px 25px rgba(0, 255, 0, 0.8); /* Green glow */
+            }
+            75% {
+                transform: rotate(135deg);
+                box-shadow: 0px 0px 20px rgba(0, 0, 255, 0.8); /* Blue glow */
+            }
+            100% {
+                transform: rotate(180deg);
+                box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5); /* White glow */
+            }
+
+}
+
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h2>NareshIT User Account<br> Creation Portal</h2>
-        <p>Spring Boot And Microservices By Natraj Sir </p>
-    </div>
-    <div class="form-section">
-        <h2>Create User Account</h2>
-        <form th:action="@{/save}" th:object="${userAccount}" method="post">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" th:field="*{username}" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Old Email Address:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" th:field="*{email}" required>
-            </div>
-            <div class="form-group">
-                <label for="mobileNo">Contact No:</label>
-                <input type="tel" id="mobileNo" name="mobileNo" placeholder="Enter your contact number" th:field="*{mobileNo}" required>
-            </div>
-            <div class="form-group">
-                <label>Gender:</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="maleRadio" value="Male" th:field="*{gender}" checked>
-                    <label class="form-check-label" for="maleRadio">Male</label>
+    <div class="container">
+
+        <div class="header">
+            <h2>Sunil Kumar Nayak<br></h2>
+            <p>After fill-up the Form Check Your gmail Kindly</p>
+        </div>
+
+        <div class="form-section">
+          <h2 class="text-center">Create Account</h2>
+            <form th:action="@{/save}" th:object="${userAccount}" method="post" id="registrationForm">
+                <div class="form-group">
+                    <label for="username">What is Your Name:  🤷‍♂️</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" th:field="*{username}" required>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="femaleRadio" value="Female" th:field="*{gender}">
-                    <label class="form-check-label" for="femaleRadio">Female</label>
+                <div class="form-group">
+                    <label for="email">Type Your Valid Mail-ID: 🪪 </label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" th:field="*{email}" required>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" th:field="*{dob}" required>
-            </div>
-            <div class="form-group">
-                <label for="aadharNo">Aadhar/SSN No:</label>
-                <input type="text" id="aadharNo" name="aadharNo" placeholder="Enter your Aadhar/SSN number" th:field="*{aadharNo}" required>
-            </div>
-            <button type="submit" class="register-button">REGISTER</button>
-            <div th:if="${message}" th:text="${message}" th:class="${#strings.contains(message, 'failed')} ? 'error-message' : 'success-message'"></div>
-        </form>
+                <div class="form-group">
+                    <label for="mobileNo">Contact No:  ☎️</label>
+                    <input type="tel" id="mobileNo" name="mobileNo" placeholder="Enter your contact number" th:field="*{mobileNo}" required>
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="maleRadio" value="Male" th:field="*{gender}" checked>
+                        <label class="form-check-label" for="maleRadio">Male 🫅 </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="femaleRadio" value="Female" th:field="*{gender}">
+                        <label class="form-check-label" for="femaleRadio">Female 👰 </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth: 🪪</label>
+                    <input type="date" id="dob" name="dob" th:field="*{dob}" required>
+                </div>
+                <div class="form-group">
+                    <label for="aadharNo">Aadhar/SSN No: 🪪</label>
+                    <input type="text" id="aadharNo" name="aadharNo" placeholder="Enter your Aadhar/SSN number" th:field="*{aadharNo}" required>
+                </div>
+                <button type="submit" class="register-button">REGISTER</button>
+                <div id="message-container" th:if="${message}" class="message-box" >
+                    <div  th:text="${message}" th:class="${#strings.contains(message, 'failed')} ? 'error-message' : 'success-message'"></div>
+                </div>
+                <div class="processing">
+                    <div class="spinner"></div>
+                    <p>Processing your request...</p>
+                </div>
+            </form>
+        </div>
+
+     
+        <!-- React Image Container -->
+        <div class="react-image-container">
+            <img src="https://icon.icepanel.io/Technology/svg/React.svg" alt="React" />
+        </div>
+
+        
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    const formSection = document.querySelector('.form-section');
 
-    function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#registrationForm').submit(function(event) {
+                event.preventDefault();
+                $('.processing').show();
+                // Simulate email send delay (replace with your actual AJAX call)
+                setTimeout(function() {
+                    // After the delay, submit the form
+                    $('#registrationForm').unbind('submit').submit();
+                }, 3000);
+            });
 
-    function applyRandomGlow() {
-        const randomColor = getRandomColor();
-        formSection.style.boxShadow = `0px 0px 20px 10px ${randomColor}`;
-    }
+            // Automatically close the error message after a delay
+            setTimeout(function() {
+                $('#message-container').hide(); // Hide the message-container after 5 seconds
+            }, 5000); 
+        });
+    </script>
 
-    setInterval(applyRandomGlow, 1000);
-</script>
 </body>
 </html>

@@ -1,9 +1,6 @@
-server:
-  port: 8082
-
 spring:
   application:
-    name: Docker-MiniProject03-UserManagementAPI
+    name: Docker-MiniProject03-UserManagementApiApplication
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql:///jrtp
@@ -29,9 +26,10 @@ spring:
           starttls:
             enable: true
             required: true
-
 mailbody:
   registeruser:
     location: src/main/java/org/sun/user_registration_body.txt
   recoverpwd:
     location: src/main/java/org/sun/recover_pwd_body.txt
+server:
+  port: 8082

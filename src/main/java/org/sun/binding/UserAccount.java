@@ -1,4 +1,3 @@
-//UserAccount
 package org.sun.binding;
 
 import lombok.AllArgsConstructor;
@@ -8,18 +7,16 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserAccount {
-    private Integer userId; // will not be filled during user registration
-    private String username;
-    private String name;
+    private Integer userId; 
+    private String username; 
     private String email;
     private Long mobileNo;
-    private String gender ="Female"; //by default Female will come
-    private LocalDate dob=LocalDate.now();//when dob launched it should point to system date and time
+    private String gender ="Female"; 
+    private LocalDate dob=LocalDate.now();
     private Long aadharNo;
-    private String active_sw;
-
-
+    // Add the password field to UserAccount
+    private String password; 
 }

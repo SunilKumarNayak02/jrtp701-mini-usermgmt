@@ -19,5 +19,5 @@ public interface IUserMgmtService {
     public String deleteUserById(Integer id);
     public String changeUserStatus(Integer id, String status);
     public String recoverPassword(RecoverPassword recover) throws Exception;
-
+    public List<UserMaster> listUsersMaster();
 }

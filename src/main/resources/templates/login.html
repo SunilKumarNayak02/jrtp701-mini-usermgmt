@@ -121,21 +121,22 @@
     </div>
     <div class="form-section">
         <i class="fas fa-user user-icon"></i>
-        <span sec:authorize="isAuthenticated()" sec:authentication="principal.username"></span>
+        <span th:if="${loggedInUser != null}" th:text="${loggedInUser}"></span>
         <h2>Welcome to Naresh IT</h2>
-        <form th:action="@{/login}" th:object="${loginCredentials}" method="post">
+        <form th:action="@{/login}" method="post">
             <div class="form-group">
-                <label for="email">Username:</label>
-                <input type="text" id="email" name="email" placeholder="Enter your username" th:field="*{email}" required>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" th:field="*{password}" required>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
             <a href="#" class="forgot-password">Forgot Password?</a> <br>
             <button type="submit" class="login-button">LOGIN</button>
             <div th:if="${message}" th:text="${message}" th:class="${#strings.contains(message, 'Invalid')} ? 'error-message' : 'success-message'"></div>
         </form>
+        <a th:href="@{/logout}" class="btn btn-outline-primary" th:if="${loggedInUser != null}">Logout</a> <br>
     </div>
 </div>
 

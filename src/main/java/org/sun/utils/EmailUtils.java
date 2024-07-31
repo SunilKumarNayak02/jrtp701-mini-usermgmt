@@ -28,11 +28,11 @@ public class EmailUtils {
             mailSentStatus = true;
         }
 
-catch(Exception e){
+        catch(Exception e){
             e.printStackTrace();
             throw e;
         }
         return mailSentStatus;
     }
 
-        }
+}

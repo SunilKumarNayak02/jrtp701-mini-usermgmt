@@ -1,4 +1,4 @@
-//RecoverPassword
+// RecoverPassword
 package org.sun.binding;
 
 import lombok.AllArgsConstructor;

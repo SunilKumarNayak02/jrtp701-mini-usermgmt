@@ -1,4 +1,4 @@
-//ActivateUser
+// ActivateUser
 package org.sun.binding;
 
 import lombok.AllArgsConstructor;

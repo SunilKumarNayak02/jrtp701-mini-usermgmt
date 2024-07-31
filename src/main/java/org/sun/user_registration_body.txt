@@ -1,5 +1,3 @@
-
-
 hi {FULL-NAME}, <br>
 <br>
 Your user account registration process is completed .< br>
