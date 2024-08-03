@@ -14,7 +14,7 @@ public class UserAccount {
     private String username; 
     private String email;
     private Long mobileNo;
-    private String gender ="Female"; 
+    private String gender; 
     private LocalDate dob=LocalDate.now();
     private Long aadharNo;
     // Add the password field to UserAccount
