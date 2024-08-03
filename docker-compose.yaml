@@ -1,0 +1,34 @@
+services:
+ dbservice:
+  image: mysql:8.4
+  environment:
+   - MYSQL_ROOT_PASSWORD=ramram
+   - MYSQL_USERNAME=root
+   - MYSQL_DATABASE=jrtp
+  ports:
+   - 3306:3306
+  networks:
+   - mysql-boot-network
+  volumes:
+   - ./data:/var/lib/mysql
+  healthcheck:  	    
+   test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]    
+   interval: 1s
+   timeout: 3s	
+   retries: 10        
+ appservice:
+  build: ./target
+  depends_on:
+   dbservice:
+    condition: service_healthy
+  environment:
+   - spring.datasource.url=jdbc:mysql://dbservice:3306/jrtp?createDatabaseIfNotExist=true
+   - spring.datasource.username=root
+   - spring.datasource.password=ramram  
+  ports:
+   - 8080:8080 
+  networks:
+  - mysql-boot-network
+networks:
+    mysql-boot-network:
+        driver: bridge
